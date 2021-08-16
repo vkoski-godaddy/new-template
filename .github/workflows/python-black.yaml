@@ -3,6 +3,8 @@ on: [workflow_dispatch, pull_request]
 
 jobs:
   pythonblack_job:
+    runs-on: ubuntu-latest
+    name: Runs PS Script Analyzer
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
