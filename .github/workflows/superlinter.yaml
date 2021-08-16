@@ -52,6 +52,7 @@ jobs:
       - name: Lint Code Base
         uses: vkoski-godaddy/super-linter@latest
         env:
+          FILTER_REGEX_INCLUDE: .*scripts/.*
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
