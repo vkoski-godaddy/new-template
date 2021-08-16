@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 joe=$(cat /etc/hostname)
 fred='this is a test'
 alex=$(awk -F' is a ' '{print $1}' <<< $fred)
