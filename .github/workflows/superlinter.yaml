@@ -53,6 +53,7 @@ jobs:
         uses: vkoski-godaddy/super-linter@latest
         env:
           FILTER_REGEX_INCLUDE: .*scripts/.*
-          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_ALL_CODEBASE: true
+          USE_FIND_ALGORITHM: true
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
