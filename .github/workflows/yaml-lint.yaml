@@ -1,0 +1,15 @@
+name: YAML Lint
+on: [push,workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: YAML Lint
+        id: yamllint
+        uses: vkoski-godaddy/gha-lint-yaml@master
+        with:
+          path: "."
+      - name: Check outputs and modified files
+        run: |
+          test "${{ steps.selftest.outputs.warnings }}" == "1"
