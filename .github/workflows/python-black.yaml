@@ -1,0 +1,15 @@
+name: ScriptAnalzyer
+on: [workflow_dispatch, pull_request]
+
+jobs:
+  scriptanalyzer_job:
+  runs-on: ubuntu-latest
+  name: Runs PS ScriptAnalyzer
+  steps:
+    - name: Check out repository code
+      uses: actions/checkout@v2
+    - name: PS ScriptAnalyzer Runner
+      uses: vkoski/black-check@master
+      id: scriptanalyzer
+      with:
+        path: 'scripts/'
