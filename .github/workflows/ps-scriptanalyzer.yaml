@@ -1,4 +1,4 @@
-name: CI
+name: ScriptAnalyzer
 on: [push, pull_request,workflow_dispatch]
 jobs:
   lint:
@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: lint
+    - name: ps-scriptanalyzer
       uses: vkoski/github-action-psscriptanalyzer@master
       with:
         sendComment: true
