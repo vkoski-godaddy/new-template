@@ -5,9 +5,10 @@ jobs:
     name: Run PS ScriptAnalyzer
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Check out repository code
+      uses: actions/checkout@v2
     - name: ps-scriptanalyzer
-      uses: vkoski/github-action-psscriptanalyzer@master
+      uses: vkoski-godaddy/github-action-psscriptanalyzer@master
       with:
         sendComment: true
         failOnErrors: true
