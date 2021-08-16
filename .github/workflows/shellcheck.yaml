@@ -1,0 +1,19 @@
+name: Shellcheck
+on: [workflow_dispatch, pull_request]
+
+jobs:
+  shellcheck_job:
+    runs-on: ubuntu-latest
+    name: Runs Shellcheck
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Shellcheck Runner
+        id: shellcheck
+        uses: vkoski-godaddy/action-shellcheck@master
+        #env:
+        #  SHELLCHECK_OPTS: 
+        with:
+          severity: info
+          format: tty
+          scandir: scripts/
