@@ -1,15 +1,17 @@
-name: pythonblack
-on: [workflow_dispatch, pull_request]
-
+name: black-action
+on: [push, pull_request, workflow_dispatch]
 jobs:
-  pythonblack_job:
-    runs-on: ubuntu-latest
-    name: Runs PS Script Analyzer
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - name: black Runner
-        uses: vkoski-godaddy/black-check@master
-        id: pythonblack
-        with:
-          path: 'scripts/'
+  name: runner / black
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v2
+    - name: Check files using the black formatter
+      uses: vkoski-godaddy/action-black@v1
+      id: action_black
+      with:
+        black_args: "."
+    - name: Annotate diff changes using reviewdog
+      if: steps.action_black.outputs.is_formatted == 'true'
+      uses: vkoski-godaddy/action-suggester@v1
+      with:
+        tool_name: blackfmt
