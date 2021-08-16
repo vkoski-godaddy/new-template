@@ -9,7 +9,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: black Runner
-        uses: vkoski/black-check@master
+        uses: vkoski-godaddy/black-check@master
         id: pythonblack
         with:
           path: 'scripts/'
