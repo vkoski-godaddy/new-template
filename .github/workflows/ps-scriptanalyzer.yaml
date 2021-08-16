@@ -1,0 +1,16 @@
+name: CI
+on: [push, pull_request,workflow_dispatch]
+jobs:
+  lint:
+    name: Run PS ScriptAnalyzer
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: lint
+      uses: vkoski/github-action-psscriptanalyzer@master
+      with:
+        sendComment: true
+        failOnErrors: true
+        failOnWarnings: true
+        failOnInfos: false
+        repoToken: ${{ secrets.GITHUB_TOKEN }}
