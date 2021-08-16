@@ -9,7 +9,7 @@ jobs:
         id: yamllint
         uses: vkoski-godaddy/gha-lint-yaml@master
         with:
-          path: "."
+          path: "./.github/workflows/*.yaml"
       - name: Check outputs and modified files
         run: |
           test "${{ steps.selftest.outputs.warnings }}" == "1"
