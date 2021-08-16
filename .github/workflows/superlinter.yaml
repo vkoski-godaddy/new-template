@@ -58,3 +58,13 @@ jobs:
           LOG_LEVEL: DEBUG
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      # Upload Mega-Linter artifacts
+      - name: Archive production artifacts
+        if: ${{ success() }} || ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: Super-Linter reports
+          path: |
+            report
+            super-linter.log
