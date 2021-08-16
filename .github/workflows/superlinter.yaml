@@ -55,7 +55,7 @@ jobs:
           FILTER_REGEX_INCLUDE: .*scripts/.*
           VALIDATE_ALL_CODEBASE: true
           USE_FIND_ALGORITHM: true
-          LOG_LEVEL: DEBUG
+          #LOG_LEVEL: VERBOSE
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
