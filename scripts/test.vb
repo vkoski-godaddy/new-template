@@ -6,12 +6,12 @@
 '@SAFELIBINCLUDE
 Function GetTaniumDir(strSubDir, sh)
     On Error Resume Next
-    GetTaniumDir=Eval("sh.Environment(""Process"")(""TANIUM_CLIENT_ROOT"")") : Err.Clear
-    If GetTaniumDir="" Then GetTaniumDir=Eval("sh.RegRead(""HKLM\Software\Tanium\Tanium Client\Path"")") : Err.Clear
-    If GetTaniumDir="" Then GetTaniumDir=Eval("sh.RegRead(""HKLM\Software\Wow6432Node\Tanium\Tanium Client\Path"")") : Err.Clear
-    If GetTaniumDir="" Then GetTaniumDir=Eval("sh.RegRead(""HKLM\Software\McAfee\Real Time"")") : Err.Clear
-    If GetTaniumDir="" Then GetTaniumDir=Eval("sh.RegRead(""HKLM\Software\Wow6432Node\McAfee\Real Time\Path"")") : Err.Clear
-    If GetTaniumDir="" Then Err.Clear: Exit Function
+    GetTaniumDir = Eval("sh.Environment(""Process"")(""TANIUM_CLIENT_ROOT"")") : Err.Clear
+    If GetTaniumDir = "" Then GetTaniumDir = Eval("sh.RegRead(""HKLM\Software\Tanium\Tanium Client\Path"")") : Err.Clear
+    If GetTaniumDir = "" Then GetTaniumDir = Eval("sh.RegRead(""HKLM\Software\Wow6432Node\Tanium\Tanium Client\Path"")") : Err.Clear
+    If GetTaniumDir = "" Then GetTaniumDir = Eval("sh.RegRead(""HKLM\Software\McAfee\Real Time"")") : Err.Clear
+    If GetTaniumDir = "" Then GetTaniumDir = Eval("sh.RegRead(""HKLM\Software\Wow6432Node\McAfee\Real Time\Path"")") : Err.Clear
+    If GetTaniumDir = "" Then Err.Clear : Exit Function
     On Error Goto 0
 
     If Not Right(GetTaniumDir, 1) = "\" Then
@@ -72,33 +72,33 @@ vulnerabilityFile = GetTaniumDir("Tools\Comply", sh) & "results\vulnerability_un
 findingsDatesFile = GetTaniumDir("Tools\Comply", sh) & "results\findings_dates.txt"
 
 Sub PrintFindings(fs, filePath, findingsDatesDict)
-  If fs.FileExists(filePath) Then
-    Dim findingsFile, findingsLine, splitLine, findingsId, dateArr
+    If fs.FileExists(filePath) Then
+        Dim findingsFile, findingsLine, splitLine, findingsId, dateArr
     Set findingsFile = fs.OpenTextFile(filePath, ForReading)
     Do While Not findingsFile.AtEndOfStream
-      findingsLine = findingsFile.ReadLine
-      splitLine = Split(findingsLine, "|")
-      findingsId = splitLine(0)
-      If splitLine(2) = "nonvulnerable" Then
-        j = 2
-      Else
-        If findingsDatesDict.Exists(findingsId) Then
-          dateArr = findingsDatesDict.Item(findingsId)
-          WScript.Echo findingsLine & "|" & dateArr(0) & "|" & dateArr(1)
+            findingsLine = findingsFile.ReadLine
+            splitLine = Split(findingsLine, "|")
+            findingsId = splitLine(0)
+            If splitLine(2) = "nonvulnerable" Then
+                j = 2
+            Else
+                If findingsDatesDict.Exists(findingsId) Then
+                    dateArr = findingsDatesDict.Item(findingsId)
+                    WScript.Echo findingsLine & "|" & dateArr(0) & "|" & dateArr(1)
         Else
-          WScript.Echo findingsLine & "||"
+                    WScript.Echo findingsLine & "||"
         End If
-      End If
-    Loop
-    findingsFile.Close
-  End If
+            End If
+        Loop
+        findingsFile.Close
+    End If
 End Sub
 
 If fs.FileExists(complianceFile) Or fs.FileExists(vulnerabilityFile) Then
-  Dim findingsDatesDict: Set findingsDatesDict = ReadFindingsDatesFile(findingsDatesFile)
+Dim findingsDatesDict : Set findingsDatesDict = ReadFindingsDatesFile(findingsDatesFile)
   PrintFindings fs, complianceFile, findingsDatesDict
   PrintFindings fs, vulnerabilityFile, findingsDatesDict
 Else
-  WScript.Echo "Findings not found"
+WScript.Echo "Findings not found"
 End If
 ' Copyright 2021, Tanium Inc.
