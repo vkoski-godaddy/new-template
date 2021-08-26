@@ -3,10 +3,12 @@ name: 'Compile Mermaid in Markdown'
 on:
   push:
     paths:
-      - '**/*.md'
+      - '**/*.mermaid'
+      - '**/*.mmd'
   workflow_dispatch:
     paths:
-      - '**/*.md'
+      - '**/*.mermaid'
+      - '**/*.mmd'
 
 jobs:
   build:
